@@ -4,14 +4,16 @@ from keras.models import *
 from keras.layers import *
 from keras.datasets import mnist
 import os
+from tqdm import tqdm
 
 OUT_DIR = './DNN_out/'
 img_shape = (28, 28, 1)
 
 epochs = 100000
-batch_size = 128
-noise = 100
-sample_interval = 100
+#batch_size = 128
+batch_size = 1024
+noise = 50
+sample_interval = 1000
 
 (X_train, _), (_, _) = mnist.load_data()
 print(X_train.shape)
@@ -52,7 +54,7 @@ fake = np.zeros((batch_size, 1))
 #print(real)
 #print(fake)
 
-for epoch in range(epochs):
+for epoch in tqdm(range(epochs)):
     idx = np.random.randint(0, X_train.shape[0], batch_size)
     real_imgs = X_train[idx]
 
